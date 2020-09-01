@@ -38,7 +38,7 @@ namespace CodeCopier
                 try
                 {
                     await Task.Delay(500);
-                    var files = GetFiles();
+                    var files = GetFiles().Where(f => f != m_outputPath).ToArray();
                     var lastEdited = FindLastEdited(files);
                     if (lastEdited == lastUpdated) continue;
                     var mergedFile = CreateMergedCsFile(files.Select(f => File.ReadAllLines(f)).SelectMany(f => f).ToList(), lastEdited);
